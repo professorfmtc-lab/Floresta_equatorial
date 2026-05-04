@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Avaliação — A Floresta Equatorial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --verde-escuro: #1a3a2a;
+      --verde-medio: #2d5e3f;
+      --verde-claro: #4caf79;
+      --verde-suave: #a8d5b5;
+      --amarelo: #e8c44a;
+      --creme: #f5f0e8;
+      --branco: #fefefe;
+      --texto: #1c2b22;
+      --texto-suave: #4a6356;
+      --sombra: rgba(26, 58, 42, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--creme);
+      color: var(--texto);
+    }
+
+    /* --- BLOCO 1: VÍDEO (ASPETO CINEMA) --- */
+    .bloco-video {
+      background-color: var(--verde-escuro);
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 6px solid var(--amarelo);
+    }
+
+    .video-container {
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      background: #000;
+      line-height: 0;
+    }
+
+    video { width: 100%; height: auto; }
+
+    /* --- BLOCO 2: FICHA DE AVALIAÇÃO COMPLETA --- */
+    header {
+      padding: 3rem 1.5rem 1rem;
+      text-align: center;
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: var(--verde-claro);
+      color: var(--verde-escuro);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    header h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--verde-escuro);
+    }
+
+    header h1 em { color: var(--amarelo); font-style: italic; }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 4rem;
+    }
+
+    .secao { margin-bottom: 3.5rem; }
+
+    .secao-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--verde-suave);
+      padding-bottom: 10px;
+    }
+
+    .secao-numero {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--verde-escuro);
+      color: var(--amarelo);
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .secao-titulo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem; font-weight: 600;
+      color: var(--verde-escuro);
+    }
+
+    /* ESCOLHA MÚLTIPLA */
+    .pergunta-mc {
+      background: var(--branco);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 12px var(--sombra);
+      border-left: 4px solid var(--verde-claro);
+    }
+
+    .pergunta-numero {
+      font-size: 0.72rem; font-weight: 600;
+      color: var(--verde-claro); margin-bottom: 0.45rem;
+      text-transform: uppercase;
+    }
+
+    .pergunta-texto { font-weight: 500; margin-bottom: 1.1rem; line-height: 1.5; }
+
+    .opcao {
+      display: flex; align-items: flex-start; gap: 0.7rem;
+      padding: 0.7rem 0.9rem; border-radius: 8px;
+      background: var(--creme); margin-bottom: 8px;
+      cursor: pointer; transition: 0.2s;
+      font-size: 0.94rem;
+    }
+
+    .opcao:hover { background: rgba(76,175,121,0.1); }
+    .opcao input { margin-top: 4px; accent-color: var(--verde-medio); }
+    .letra { font-weight: 700; color: var(--verde-medio); }
+
+    /* CORRESPONDÊNCIA */
+    .correspondencia-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+    }
+
+    .item-corr {
+      background: var(--branco); border-radius: 10px;
+      padding: 0.9rem; margin-bottom: 0.55rem;
+      box-shadow: 0 1px 6px var(--sombra);
+      font-size: 0.92rem; display: flex; gap: 0.6rem;
+      align-items: center; min-height: 65px;
+    }
+
+    .tag {
+      background: var(--verde-escuro); color: var(--amarelo);
+      padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .tag.def { background: var(--verde-suave); color: var(--verde-escuro); }
+
+    /* COMPLETAR TEXTO */
+    .texto-lacunas {
+      background: var(--branco); border-radius: 14px;
+      padding: 2rem; box-shadow: 0 2px 12px var(--sombra);
+      line-height: 2.4; border-top: 4px solid var(--amarelo);
+    }
+
+    .lacuna {
+      display: inline-block; border-bottom: 2.5px solid var(--verde-medio);
+      min-width: 120px; margin: 0 5px; vertical-align: middle;
+    }
+
+    .banco-palavras {
+      margin-top: 2rem; padding: 1.2rem;
+      background: var(--creme); border-radius: 10px;
+      border: 1.5px dashed var(--verde-suave);
+    }
+
+    .palavras-flex { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 10px; }
+
+    .palavra {
+      background: var(--branco); border: 1.5px solid var(--verde-suave);
+      border-radius: 20px; padding: 0.3rem 0.8rem; font-size: 0.85rem;
+    }
+
+    footer { text-align: center; padding: 3rem; color: var(--texto-suave); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<div class="bloco-video">
+  <div class="video-container">
+    <video controls>
+      <source src="floresta_Equatorial.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
+
+<header>
+  <div class="header-badge">🌿 Geografia — Biomas</div>
+  <h1>A <em>Floresta Equatorial</em></h1>
+</header>
+
+<main>
+  <!-- I. ESCOLHA MÚLTIPLA COMPLETA (QUESTÕES 1-5) -->
+  <section class="secao">
+    <div class="secao-header">
+      <div class="secao-numero">I</div>
+      <div class="secao-titulo">Escolha Múltipla[cite: 1]</div>
+    </div>
+
+    <!-- Pergunta 1 -->
+    <div class="pergunta-mc">
+      <div class="pergunta-numero">Pergunta 1[cite: 1]</div>
+      <div class="pergunta-texto">Quais são as duas principais características climáticas que sustentam a floresta equatorial?[cite: 1]</div>
+      <label class="opcao"><input type="radio" name="q1"> <span><span class="letra">A)</span> Temperaturas baixas e precipitação irregular ao longo do ano.[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q1"> <span><span class="letra">B)</span> Temperaturas elevadas e constantes, com precipitação abundante e regular durante todo o ano.[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q1"> <span><span class="letra">C)</span> Estações do ano bem marcadas, com um período seco prolongado no verão.[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q1"> <span><span class="letra">D)</span> Temperaturas moderadas e chuvas concentradas apenas em dois meses.[cite: 1]</span></label>
+    </div>
+
+    <!-- Pergunta 2 -->
+    <div class="pergunta-mc">
+      <div class="pergunta-numero">Pergunta 2[cite: 1]</div>
+      <div class="pergunta-texto">Como se designa a camada superior da floresta equatorial, composta por árvores de grande porte que se elevam acima das restantes?[cite: 1]</div>
+      <label class="opcao"><input type="radio" name="q2"> <span><span class="letra">A)</span> Estrato arbustivo[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q2"> <span><span class="letra">B)</span> Estrato de renovação[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q2"> <span><span class="letra">C)</span> Dossel superior / Emergente[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q2"> <span><span class="letra">D)</span> Nível do solo[cite: 1]</span></label>
+    </div>
+
+    <!-- Pergunta 3 -->
+    <div class="pergunta-mc">
+      <div class="pergunta-numero">Pergunta 3[cite: 1]</div>
+      <div class="pergunta-texto">Qual dos seguintes animais é um exemplo de espécie adaptada à vida nos estratos elevados da floresta equatorial?[cite: 1]</div>
+      <label class="opcao"><input type="radio" name="q3"> <span><span class="letra">A)</span> Crocodilo[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q3"> <span><span class="letra">B)</span> Minhoca[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q3"> <span><span class="letra">C)</span> Preguiça[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q3"> <span><span class="letra">D)</span> Pinguim[cite: 1]</span></label>
+    </div>
+
+    <!-- Pergunta 4 -->
+    <div class="pergunta-mc">
+      <div class="pergunta-numero">Pergunta 4[cite: 1]</div>
+      <div class="pergunta-texto">A estratificação vertical da floresta equatorial tem como principal função ecológica:[cite: 1]</div>
+      <label class="opcao"><input type="radio" name="q4"> <span><span class="letra">A)</span> Reduzir o número de espécies vegetais para evitar competição.[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q4"> <span><span class="letra">B)</span> Otimizar o aproveitamento da luz e do espaço, permitindo maior biodiversidade.[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q4"> <span><span class="letra">C)</span> Proteger a floresta contra ventos fortes.[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q4"> <span><span class="letra">D)</span> Facilitar a deslocação dos animais entre países.[cite: 1]</span></label>
+    </div>
+
+    <!-- Pergunta 5 -->
+    <div class="pergunta-mc">
+      <div class="pergunta-numero">Pergunta 5[cite: 1]</div>
+      <div class="pergunta-texto">Por que razão a floresta equatorial é considerada um bioma de "metabolismo ecológico ininterrupto"?[cite: 1]</div>
+      <label class="opcao"><input type="radio" name="q5"> <span><span class="letra">A)</span> Porque as plantas crescem apenas de noite.[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q5"> <span><span class="letra">B)</span> Porque existe um período de seca que obriga a reservar energia.[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q5"> <span><span class="letra">C)</span> Porque a ausência de invernos ou épocas secas permite um fluxo de biomassa contínuo.[cite: 1]</span></label>
+      <label class="opcao"><input type="radio" name="q5"> <span><span class="letra">D)</span> Porque as árvores entram em hibernação nos meses quentes.[cite: 1]</span></label>
+    </div>
+  </section>
+
+  <!-- II. CORRESPONDÊNCIA COMPLETA -->
+  <section class="secao">
+    <div class="secao-header">
+      <div class="secao-numero">II</div>
+      <div class="secao-titulo">Correspondência[cite: 1]</div>
+    </div>
+    <div class="correspondencia-grid">
+      <div>
+        <div class="item-corr"><span class="tag">1</span> Dossel Superior / Emergente[cite: 1]</div>
+        <div class="item-corr"><span class="tag">2</span> Biodiversidade[cite: 1]</div>
+        <div class="item-corr"><span class="tag">3</span> Lianas[cite: 1]</div>
+        <div class="item-corr"><span class="tag">4</span> Cadeia trófica[cite: 1]</div>
+        <div class="item-corr"><span class="tag">5</span> Estrato de renovação[cite: 1]</div>
+        <div class="item-corr"><span class="tag">6</span> Serrapilheira[cite: 1]</div>
+      </div>
+      <div>
+        <div class="item-corr"><span class="tag def">A</span> Matéria orgânica morta acumulada no solo da floresta.[cite: 1]</div>
+        <div class="item-corr"><span class="tag def">B</span> Variedade de espécies animais e vegetais num ecossistema.[cite: 1]</div>
+        <div class="item-corr"><span class="tag def">C</span> Relação de alimentação entre seres vivos.[cite: 1]</div>
+        <div class="item-corr"><span class="tag def">D</span> Plantas trepadeiras que buscam atingir a luz solar.[cite: 1]</div>
+        <div class="item-corr"><span class="tag def">E</span> Árvores jovens em desenvolvimento por baixo dos adultos.[cite: 1]</div>
+        <div class="item-corr"><span class="tag def">F</span> Conjunto de árvores de grande porte no topo da floresta.[cite: 1]</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- III. COMPLETAR O TEXTO (TEXTO INTEGRAL) -->
+  <section class="secao">
+    <div class="secao-header">
+      <div class="secao-numero">III</div>
+      <div class="secao-titulo">Completar o Texto[cite: 1]</div>
+    </div>
+    <div class="texto-lacunas">
+      <p>A floresta equatorial é considerada o bioma com maior <span class="lacuna"></span> do planeta, tanto a nível vegetal como animal.[cite: 1] Este bioma desenvolve-se em regiões com <span class="lacuna"></span> constantes e elevadas, associadas a uma <span class="lacuna"></span> abundante e bem distribuída ao longo de todo o ano.[cite: 1]</p>
+      <br>
+      <p>A vegetação organiza-se em diferentes <span class="lacuna"></span>, desde o dossel superior até à vegetação <span class="lacuna"></span> ao nível do solo.[cite: 1] Esta organização permite que a floresta maximize o aproveitamento da <span class="lacuna"></span> e do espaço disponível.[cite: 1]</p>
+      <br>
+      <p>A fauna adapta-se a este ambiente de grande densidade vegetal, sendo frequente a especialização de espécies para a vida <span class="lacuna"></span>, como os macacos e as preguiças.[cite: 1] Os <span class="lacuna"></span> desempenham um papel fundamental na cadeia trófica, sendo sustentados pela elevada produção de matéria <span class="lacuna"></span> da floresta.[cite: 1] No seu conjunto, o clima, a flora e a fauna formam um sistema em perfeito <span class="lacuna"></span>.[cite: 1]</p>
+      
+      <div class="banco-palavras">
+        <strong>🌱 Banco de Palavras:</strong>
+        <div class="palavras-flex">
+          <span class="palavra">biodiversidade</span> <span class="palavra">temperaturas</span> <span class="palavra">precipitação</span>
+          <span class="palavra">estratos</span> <span class="palavra">rasteira</span> <span class="palavra">luz solar</span>
+          <span class="palavra">arbórea</span> <span class="palavra">insetos</span> <span class="palavra">orgânica</span> <span class="palavra">equilíbrio</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Ficha elaborada com base no filme didático <em>A Floresta Equatorial</em>[cite: 1]</p>
+</footer>
+
+</body>
+</html>
